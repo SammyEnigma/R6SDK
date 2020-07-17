@@ -1,13 +1,13 @@
 #include <Windows.h>
 #include <iostream>
 #include <TlHelp32.h>
-
+#include <xmmintrin.h>
+#include "math.h"
 template <typename T>
 struct R6Array {
 	T* elements;
 	DWORD size : 30;
 };
-
 #include "mem.h"
 #include "offsets.h"
 #include "Entity.h"

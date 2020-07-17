@@ -6,7 +6,17 @@ namespace offsets {
 	}
 
 	namespace GameManager {
-		DWORD Entlist = 0x98;
-		uintptr_t decryptionkey_entlist = 0xE60F6CF8784B5E96;
+		DWORD Entlist = 0x488;
+		uintptr_t decryptionkey_entlist = 0x5B27FE2BA1503866;
+	}
+
+	namespace Entity {
+		DWORD maincomp = 0xAA8;
+		DWORD pawn = 0x20;
+		uintptr_t decryptionkey_pawn = 0xB9A25DD8A6AD943D;
+
+		namespace npawn {
+			DWORD skeleton = 0x908;
+		}
 	}
 }

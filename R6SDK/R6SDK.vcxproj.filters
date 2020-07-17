@@ -25,6 +25,9 @@
     <Filter Include="Game\Entity">
       <UniqueIdentifier>{52aef66d-185f-4fbe-8b52-20592fa4551b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Math">
+      <UniqueIdentifier>{283648e0-0b86-4d75-a363-dac91d117e5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="R6.cpp">
@@ -42,6 +45,9 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Game\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="math.cpp">
+      <Filter>Headerdateien\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes.h">
@@ -58,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>Headerdateien\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

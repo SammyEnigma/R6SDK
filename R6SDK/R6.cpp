@@ -12,8 +12,11 @@ void MainLoop(){
 		r6->gamemanager->EntList = r6->gamemanager->get_entitylist();
 		for (int i = 0; i < r6->gamemanager->EntList.size; i++) {
 			Entity* current = &r6->gamemanager->EntList.elements[i];
-			printf("Entity [%i] Address: [%p] \n", i, current->address);
+			printf(" Entity [%i] : %f %f %f\n",i, current->maincomp.pawn.head.x, current->maincomp.pawn.head.y, current->maincomp.pawn.head.z);
+			
 		}
+		Sleep(1000);
+		system("cls");
 	}
 }
 
