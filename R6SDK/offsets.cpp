@@ -13,7 +13,26 @@ namespace offsets {
 	namespace Entity {
 		DWORD maincomp = 0xAA8;
 		DWORD pawn = 0x20;
+		DWORD info = 0xD0;
+		DWORD weapon = 0x90;
 		uintptr_t decryptionkey_pawn = 0xB9A25DD8A6AD943D;
+		uintptr_t decryptionkey_main_component = 0xDC8041B6C7F86465;
+
+		namespace ninfo {
+			DWORD team = 0x1BE;
+			DWORD CTU = 0x1B0;
+			DWORD OP = 0x1B1;
+			
+		}
+
+		namespace nweapon {
+			DWORD currweapon = 0xC8;
+			DWORD weaponinfo = 0x290;
+			uintptr_t decryptionkey_weaponinfo = 0xD4CF9346AD08C46A;
+			DWORD firetype = 0x118;
+			DWORD ammo = 0x11C;
+			DWORD reserved = 0x120;
+		}
 
 		namespace npawn {
 			DWORD skeleton = 0x908;

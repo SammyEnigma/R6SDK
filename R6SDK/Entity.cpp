@@ -51,3 +51,44 @@ math::Vec4 Skeleton::get_bone(int idx) {
 	const auto offset = 0x20 * bone_index + bone_data;
 	return transform_bone(bone_info, (__m128*)offset);
 }
+
+const char* OperatorName[26][5] = {
+{"BOT","SMOKE","MUTE","SLEDGE","THATCHER"},
+{"RECRUIT","CASTLE","ASH","PULSE","THERMITE"},
+{0,"DOC","ROOK","TWITCH","MONTAGNE"},
+{0,"GLAZ","FUZE","KAPKAN","TACHANKA"},
+{0,"BLITZ","IQ","JAGER","BANDIT"},
+{0,"BUCK","FROST"},
+{0,"BLACKBEARD","VALKYRIE"},
+{0,"CAPITAO","CAVEIRA"},
+{0,"HIBANA","ECHO"},
+{0,"JACKAL","MIRA"},
+{0,"YING","LESION"},
+{0,"ELA","ZOFIA"},
+{0,"DOKKAEBI","VIGIL"},
+{0,0,"LION","FINKA"},
+{0,"MAESTRO","ALIBI"},
+{0,"MAVERICK","CLASH"},
+{0,"NOMAD","KAID"},
+{0,"MOZZIE","GRIDLOCK"},
+{0,"NOKK"},
+{0,"WARDEN"},
+{0,"GOYO"},
+{0,"AMARU"},
+{0,"KALI","WAMAI", "ACE"},
+{0,"ORYX"},
+{0,"IANA"},
+{0,"MELUSI"}
+};
+
+std::string Information::get_operator_name() {
+	return OperatorName[this->CTU][this->OP];
+}
+
+void CurrentWeapon::set_ammo(int curr, int reserved) {
+	r6->mem->write<int>(this->address + offsets::Entity::nweapon::ammo, curr);
+	r6->mem->write<int>(this->address + offsets::Entity::nweapon::reserved, reserved);
+}
+void CurrentWeapon::set_fire_type(int type) {
+	r6->mem->write<int>(this->address + offsets::Entity::nweapon::firetype, type);
+}

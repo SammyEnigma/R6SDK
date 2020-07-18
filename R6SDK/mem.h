@@ -4,7 +4,7 @@ private:
 	HANDLE GameHandle;
 	HWND GameHwnd;
 
-	void cread(uintptr_t at, void* buffer, size_t size);
+	
 	void cwrite(uintptr_t at, void* buffer, size_t size);
 
 	DWORD(*NtWriteVirtualMemory)(
@@ -25,7 +25,7 @@ private:
 
 public:
 
-	
+	void cread(uintptr_t at, void* buffer, size_t size);
 
 	template <typename T>
 	T read(uintptr_t at) {

@@ -32,10 +32,56 @@ public:
     math::Vec3 feet;
 };
 
+class Information {
+public:
+
+    uintptr_t address;
+    BYTE CTU;
+    BYTE OP;
+    BYTE team;
+
+	std::string get_operator_name();
+    char name[0x15];
+};
+
+class WeaponInfo {
+public:
+    uintptr_t address;
+};
+
+class CurrentWeapon {
+public:
+
+    enum fire_type : std::uint32_t {
+        full_auto = 0,
+        double_bullets = 1,
+        burst = 2,
+        single = 3
+    };
+
+    uintptr_t address;
+    WeaponInfo info;
+
+    void set_ammo(int curr, int reserved);
+    void set_fire_type(int type);
+
+    int fire_type;
+    int ammo;
+    int ammo_reserved;
+};
+
+class Weapon {
+public:
+    uintptr_t address;
+    CurrentWeapon currweapon;
+};
+
 class MainComponent {
 public:
 	uintptr_t address;
 	Pawn pawn;
+    Information info;
+    Weapon weapon;
 };
 
 class Entity {

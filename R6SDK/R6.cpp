@@ -12,7 +12,22 @@ void MainLoop(){
 		r6->gamemanager->EntList = r6->gamemanager->get_entitylist();
 		for (int i = 0; i < r6->gamemanager->EntList.size; i++) {
 			Entity* current = &r6->gamemanager->EntList.elements[i];
-			printf(" Entity [%i] : %f %f %f\n",i, current->maincomp.pawn.head.x, current->maincomp.pawn.head.y, current->maincomp.pawn.head.z);
+			//Team check is invalid for BOTS
+			printf(
+				" Entity [%i] [%s] [%s] : [%f %f %f] [%i,%i]\n",
+				current->maincomp.info.team,
+				current->maincomp.info.name,
+				current->maincomp.info.get_operator_name(),
+				current->maincomp.pawn.head.x, 
+				current->maincomp.pawn.head.y, 
+				current->maincomp.pawn.head.z,
+				current->maincomp.weapon.currweapon.ammo,
+				current->maincomp.weapon.currweapon.ammo_reserved
+			);
+			
+			//Example of weapon usage:
+			current->maincomp.weapon.currweapon.set_ammo(999, 999);
+			current->maincomp.weapon.currweapon.set_fire_type(CurrentWeapon::full_auto);
 			
 		}
 		Sleep(1000);
