@@ -13,7 +13,7 @@ void MainLoop(){
 		r6->gamemanager->EntList = r6->gamemanager->get_entitylist();
 		for (int i = 0; i < r6->gamemanager->EntList.size; i++) {
 			Entity* current = &r6->gamemanager->EntList.elements[i];
-			//Team check is invalid for BOTS
+			//Team check is invalid for BOTS (and name ofc)
 			printf(
 				" Entity [%i] [%s] [%s] : [%f %f %f] [%i,%i]\n",
 				current->maincomp.info.team,
@@ -41,10 +41,10 @@ int main() {
 	r6 = new R6();
 	r6->mem->setup();
 	
-
-
-
 	CreateThread(0, 0, (LPTHREAD_START_ROUTINE)MainLoop, 0, 0, 0);
+
+	//TODO: Localplayer, Environment, Outline, DroneScan, Devices, Chat [...]
+
 	system("pause");
 	
 }
