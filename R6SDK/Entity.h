@@ -47,6 +47,11 @@ public:
 class WeaponInfo {
 public:
     uintptr_t address;
+    float spread;
+    float recoilvert;
+    float recoilhoriz;
+    void set_spread(float spread);
+    void set_recoil(float vert, float horiz);
 };
 
 class CurrentWeapon {

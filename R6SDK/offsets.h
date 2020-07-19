@@ -31,6 +31,10 @@ namespace offsets {
 			extern DWORD firetype;
 			extern DWORD ammo;
 			extern DWORD reserved;
+			extern DWORD spread;
+			extern DWORD recoilvert;
+			extern DWORD recoilhoriz;
+			extern DWORD recoil_overwrite;
 		}
 
 		namespace npawn {

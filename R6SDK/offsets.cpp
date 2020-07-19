@@ -32,6 +32,10 @@ namespace offsets {
 			DWORD firetype = 0x118;
 			DWORD ammo = 0x11C;
 			DWORD reserved = 0x120;
+			DWORD spread = 0x68;
+			DWORD recoilvert = 0x174;
+			DWORD recoilhoriz = 0x164;
+			DWORD recoil_overwrite = 0x180;
 		}
 
 		namespace npawn {

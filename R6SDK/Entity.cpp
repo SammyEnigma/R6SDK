@@ -92,3 +92,13 @@ void CurrentWeapon::set_ammo(int curr, int reserved) {
 void CurrentWeapon::set_fire_type(int type) {
 	r6->mem->write<int>(this->address + offsets::Entity::nweapon::firetype, type);
 }
+
+void WeaponInfo::set_spread(float spread) {
+	r6->mem->write<float>(this->address + offsets::Entity::nweapon::spread, spread);
+}
+
+void WeaponInfo::set_recoil(float vert, float horiz) {
+	r6->mem->write<byte>(this->address + offsets::Entity::nweapon::recoil_overwrite, false);
+	r6->mem->write<float>(this->address + offsets::Entity::nweapon::recoilvert, vert);
+	r6->mem->write<float>(this->address + offsets::Entity::nweapon::recoilhoriz, horiz);
+}

@@ -38,5 +38,10 @@ Entity GameManager::get_ent(int idx, uintptr_t entlistaddress) {
 	newEnt.maincomp.weapon.currweapon.ammo = r6->mem->read<int>(newEnt.maincomp.weapon.currweapon.address + offsets::Entity::nweapon::ammo);
 	newEnt.maincomp.weapon.currweapon.ammo_reserved = r6->mem->read<int>(newEnt.maincomp.weapon.currweapon.address + offsets::Entity::nweapon::reserved);
 	newEnt.maincomp.weapon.currweapon.fire_type = r6->mem->read<int>(newEnt.maincomp.weapon.currweapon.address + offsets::Entity::nweapon::firetype);
+
+	//WeaponInfo Weapon->0x290
+	newEnt.maincomp.weapon.currweapon.info.spread = r6->mem->read<float>(newEnt.maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::spread);
+	newEnt.maincomp.weapon.currweapon.info.recoilvert = r6->mem->read<float>(newEnt.maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::recoilvert);
+	newEnt.maincomp.weapon.currweapon.info.recoilhoriz = r6->mem->read<float>(newEnt.maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::recoilhoriz);
 	return newEnt;
 }
