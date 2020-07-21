@@ -81,10 +81,25 @@ public:
     CurrentWeapon currweapon;
 };
 
+class MarkerComponent {
+public:
+    uintptr_t address;
+    void find(R6Array<uintptr_t>*ComponentList);
+    void set_spotted_status(bool bSpotted);
+};
+
+class PlayerComponent {
+public:
+    uintptr_t address;
+    R6Array<uintptr_t>ComponentList;
+    MarkerComponent marker;
+};
+
 class MainComponent {
 public:
 	uintptr_t address;
 	Pawn pawn;
+    PlayerComponent playercomp;
     Information info;
     Weapon weapon;
 };
@@ -95,3 +110,4 @@ public:
 	MainComponent maincomp;
     void get(int idx, uintptr_t entlistaddress);
 };
+

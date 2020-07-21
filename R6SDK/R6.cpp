@@ -15,22 +15,29 @@ void MainLoop(){
 			Entity* current = &r6->gamemanager->EntList.elements[i];
 			//Team check is invalid for BOTS (and name ofc)
 			printf(
-				" Entity [%i] [%s] [%s] : [%f %f %f] [%i,%i]\n",
+				" Entity [%i] [%s] [%s] : [%f %f %f] [%f %f %f] [%i,%i]\n",
 				current->maincomp.info.team,
 				current->maincomp.info.name,
 				current->maincomp.info.get_operator_name(),
-				current->maincomp.pawn.head.x, 
-				current->maincomp.pawn.head.y, 
+				current->maincomp.pawn.head.x,
+				current->maincomp.pawn.head.y,
 				current->maincomp.pawn.head.z,
+				current->maincomp.pawn.feet.x,
+				current->maincomp.pawn.feet.y,
+				current->maincomp.pawn.feet.z,
 				current->maincomp.weapon.currweapon.ammo,
 				current->maincomp.weapon.currweapon.ammo_reserved
 			);		
 			//Example of weapon usage:
-			current->maincomp.weapon.currweapon.set_ammo(999, 999);
-			current->maincomp.weapon.currweapon.set_fire_type(CurrentWeapon::full_auto);
+			//current->maincomp.weapon.currweapon.set_ammo(999, 999);
+			//current->maincomp.weapon.currweapon.set_fire_type(CurrentWeapon::full_auto);
 
-			current->maincomp.weapon.currweapon.info.set_spread(0.f);
-			current->maincomp.weapon.currweapon.info.set_recoil(5, 5);
+			//current->maincomp.weapon.currweapon.info.set_spread(0.f);
+			//current->maincomp.weapon.currweapon.info.set_recoil(5, 5);
+
+			//Example of marker usage:
+			current->maincomp.playercomp.marker.find(&current->maincomp.playercomp.ComponentList);
+			current->maincomp.playercomp.marker.set_spotted_status(true);
 		}
 		Sleep(1000);
 		system("cls");

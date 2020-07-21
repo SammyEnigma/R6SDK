@@ -13,10 +13,18 @@ namespace offsets {
 		extern DWORD entity_from_pawn;
 		extern DWORD maincomp;
 		extern DWORD pawn;
+		extern DWORD playercomp;
 		extern DWORD info;
 		extern DWORD weapon;
 		extern uintptr_t decryptionkey_pawn;
 		extern uintptr_t decryptionkey_main_component;
+
+		namespace ncomp {
+			extern DWORD complist;
+			extern uintptr_t decryptionkey_player_component;
+			extern DWORD vt_marker;
+			extern DWORD bSpotted;
+		}
 
 		namespace ninfo {
 			extern DWORD team;

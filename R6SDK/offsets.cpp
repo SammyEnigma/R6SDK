@@ -13,10 +13,19 @@ namespace offsets {
 	namespace Entity {
 		DWORD maincomp = 0xAA8;
 		DWORD pawn = 0x20;
+		DWORD playercomp = 0x28;
 		DWORD info = 0xD0;
 		DWORD weapon = 0x90;
 		uintptr_t decryptionkey_pawn = 0xB9A25DD8A6AD943D;
 		uintptr_t decryptionkey_main_component = 0xDC8041B6C7F86465;
+
+		namespace ncomp {
+			DWORD complist = 0xD0;
+			uintptr_t decryptionkey_player_component = 0xC3868E9D7D6FCC95;
+			DWORD vt_marker = 0x4c04670;
+			DWORD bSpotted = 0x632; //602 if from right vtable 0x633 = showMarker
+		}
+
 
 		namespace ninfo {
 			DWORD team = 0x1BE;
