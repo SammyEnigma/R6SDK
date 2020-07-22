@@ -43,6 +43,12 @@ namespace offsets {
 			extern DWORD recoilvert;
 			extern DWORD recoilhoriz;
 			extern DWORD recoil_overwrite;
+
+			extern DWORD weapon_info;
+			extern DWORD arry_to_single;
+			extern DWORD current_weapon_preset;
+			extern DWORD pull;
+			extern DWORD kick;
 		}
 
 		namespace npawn {

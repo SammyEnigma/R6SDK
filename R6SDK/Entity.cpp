@@ -160,3 +160,20 @@ void MarkerComponent::find(R6Array<uintptr_t>* ComponentList) {
 void MarkerComponent::set_spotted_status(bool bSpotted) {
 	r6->mem->write<BYTE>(this->address + offsets::Entity::ncomp::bSpotted, bSpotted);
 }
+
+void WeaponInfo::set_recoil_addition(float pull, float kick) {
+	uintptr_t weapon_info = r6->mem->read<uintptr_t>(this->address + offsets::Entity::nweapon::weapon_info);
+	uintptr_t arry_to_single = r6->mem->read<uintptr_t>(weapon_info + offsets::Entity::nweapon::arry_to_single);
+	arry_to_single = r6->mem->read<uintptr_t>(arry_to_single);
+	uintptr_t curr_weapon_preset = r6->mem->read<uintptr_t>(arry_to_single + offsets::Entity::nweapon::current_weapon_preset);
+	curr_weapon_preset = r6->mem->read<uintptr_t>(curr_weapon_preset);
+	r6->mem->write<float>(curr_weapon_preset + offsets::Entity::nweapon::pull, pull);
+	r6->mem->write<float>(curr_weapon_preset + offsets::Entity::nweapon::kick, kick);
+
+	/*VALUE TABLE
+	uintptr_t test = r6->mem->read<uintptr_t>(curr_weapon_preset + 0x18);
+	for (DWORD off = 0x0; off < 0xCD4; off += 0x4) {
+		r6->mem->write<float>(test + off, 0.f);
+	}
+	*/
+}

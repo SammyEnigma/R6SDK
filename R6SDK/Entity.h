@@ -52,6 +52,7 @@ public:
     float recoilhoriz;
     void set_spread(float spread);
     void set_recoil(float vert, float horiz);
+    void set_recoil_addition(float pull, float kick);
 };
 
 class CurrentWeapon {

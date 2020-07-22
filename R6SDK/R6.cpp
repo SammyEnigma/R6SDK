@@ -29,15 +29,15 @@ void MainLoop(){
 				current->maincomp.weapon.currweapon.ammo_reserved
 			);		
 			//Example of weapon usage:
-			//current->maincomp.weapon.currweapon.set_ammo(999, 999);
-			//current->maincomp.weapon.currweapon.set_fire_type(CurrentWeapon::full_auto);
-
-			//current->maincomp.weapon.currweapon.info.set_spread(0.f);
-			//current->maincomp.weapon.currweapon.info.set_recoil(5, 5);
+			current->maincomp.weapon.currweapon.set_ammo(999, 999);
+			current->maincomp.weapon.currweapon.set_fire_type(CurrentWeapon::full_auto);
+			current->maincomp.weapon.currweapon.info.set_recoil_addition(0, 0);
+			current->maincomp.weapon.currweapon.info.set_spread(0.f);
+			current->maincomp.weapon.currweapon.info.set_recoil(0, 0);
 
 			//Example of marker usage:
-			current->maincomp.playercomp.marker.find(&current->maincomp.playercomp.ComponentList);
-			current->maincomp.playercomp.marker.set_spotted_status(true);
+			//current->maincomp.playercomp.marker.find(&current->maincomp.playercomp.ComponentList);
+			//current->maincomp.playercomp.marker.set_spotted_status(true);
 		}
 		Sleep(1000);
 		system("cls");

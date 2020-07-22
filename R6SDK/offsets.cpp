@@ -45,6 +45,12 @@ namespace offsets {
 			DWORD recoilvert = 0x174;
 			DWORD recoilhoriz = 0x164;
 			DWORD recoil_overwrite = 0x180;
+
+			DWORD weapon_info = 0x148;
+			DWORD arry_to_single = 0x248;
+			DWORD current_weapon_preset = 0x128;
+			 DWORD pull = 0x70;
+			 DWORD kick = 0x74;
 		}
 
 		namespace npawn {
