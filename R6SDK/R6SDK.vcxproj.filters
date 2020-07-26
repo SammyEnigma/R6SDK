@@ -28,6 +28,12 @@
     <Filter Include="Headerdateien\Math">
       <UniqueIdentifier>{283648e0-0b86-4d75-a363-dac91d117e5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\RoundManager">
+      <UniqueIdentifier>{32682079-cbec-4d92-bd9f-8da2a04dec4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameProfileManager">
+      <UniqueIdentifier>{d72ece8f-1130-483e-85b5-089a74933ebb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="R6.cpp">
@@ -48,6 +54,12 @@
     <ClCompile Include="math.cpp">
       <Filter>Headerdateien\Math</Filter>
     </ClCompile>
+    <ClCompile Include="RoundManager.cpp">
+      <Filter>Game\RoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProfileManager.cpp">
+      <Filter>Game\GameProfileManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes.h">
@@ -67,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="math.h">
       <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="RoundManager.h">
+      <Filter>Game\RoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProfileManager.h">
+      <Filter>Game\GameProfileManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

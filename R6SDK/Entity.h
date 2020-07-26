@@ -110,5 +110,6 @@ public:
 	uintptr_t address;
 	MainComponent maincomp;
     void get(int idx, uintptr_t entlistaddress);
+    void get(uintptr_t maincomponentaddress);
 };
 

@@ -2,11 +2,23 @@ namespace offsets {
 
 	namespace Manager {
 		extern DWORD GameManager;
+		extern DWORD RoundManager;
+		extern DWORD GameProfileManager;
 	}
 	
 	namespace GameManager {
 		extern DWORD Entlist;
 		extern uintptr_t decryptionkey_entlist;
+	}
+
+	namespace RoundManager {
+		extern DWORD round;
+	}
+
+	namespace GameProfileManager {
+		extern DWORD _loc;
+		extern DWORD locplayer;
+		extern uintptr_t decryptionkey_localplayer;
 	}
 
 	namespace Entity {
