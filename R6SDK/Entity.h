@@ -52,6 +52,7 @@ public:
     float recoilhoriz;
     void set_spread(float spread);
     void set_recoil(float vert, float horiz);
+    void set_recoil_addition(float pull, float kick);
 };
 
 class CurrentWeapon {
@@ -81,10 +82,25 @@ public:
     CurrentWeapon currweapon;
 };
 
+class MarkerComponent {
+public:
+    uintptr_t address;
+    void find(R6Array<uintptr_t>*ComponentList);
+    void set_spotted_status(bool bSpotted);
+};
+
+class PlayerComponent {
+public:
+    uintptr_t address;
+    R6Array<uintptr_t>ComponentList;
+    MarkerComponent marker;
+};
+
 class MainComponent {
 public:
 	uintptr_t address;
 	Pawn pawn;
+    PlayerComponent playercomp;
     Information info;
     Weapon weapon;
 };
@@ -94,4 +110,6 @@ public:
 	uintptr_t address;
 	MainComponent maincomp;
     void get(int idx, uintptr_t entlistaddress);
+    void get(uintptr_t maincomponentaddress);
 };
+

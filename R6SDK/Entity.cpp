@@ -50,7 +50,7 @@ void Entity::get(int idx, uintptr_t entlistaddress) {
 	this->maincomp.pawn.skeleton.address = this->maincomp.pawn.address + offsets::Entity::npawn::skeleton;
 	math::Vec4 headpos = this->maincomp.pawn.skeleton.get_bone(Skeleton::bone_ids::head);
 	this->maincomp.pawn.head = math::Vec3(headpos.x, headpos.y, headpos.z);
-	math::Vec4 feetpos = this->maincomp.pawn.skeleton.get_bone(Skeleton::bone_ids::foot_right);
+	math::Vec4 feetpos = this->maincomp.pawn.skeleton.get_bone(Skeleton::bone_ids::knee_left);
 	this->maincomp.pawn.feet = math::Vec3(feetpos.x, feetpos.y, feetpos.z);
 
 	//Entity Information 0xD0
@@ -74,6 +74,55 @@ void Entity::get(int idx, uintptr_t entlistaddress) {
 	this->maincomp.weapon.currweapon.info.spread = r6->mem->read<float>(this->maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::spread);
 	this->maincomp.weapon.currweapon.info.recoilvert = r6->mem->read<float>(this->maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::recoilvert);
 	this->maincomp.weapon.currweapon.info.recoilhoriz = r6->mem->read<float>(this->maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::recoilhoriz);
+
+	//PlayerComponent
+	this->maincomp.playercomp.address = r6->mem->read<uintptr_t>(this->maincomp.address + offsets::Entity::playercomp) ^ offsets::Entity::ncomp::decryptionkey_player_component;
+	this->maincomp.playercomp.ComponentList.size = r6->mem->read<DWORD>(this->maincomp.playercomp.address + 0xE0) & 0x3FFFFFFF;
+	this->maincomp.playercomp.ComponentList.elements = new uintptr_t[this->maincomp.playercomp.ComponentList.size];
+	uintptr_t list_address = r6->mem->read<uintptr_t>(this->maincomp.playercomp.address + 0xD8);
+	for (int i = 0; i < this->maincomp.playercomp.ComponentList.size; i++) 
+		this->maincomp.playercomp.ComponentList.elements[i] = r6->mem->read<uintptr_t>(list_address + i * sizeof(void*));
+}
+
+void Entity::get(uintptr_t maincomponentaddress) {
+	this->maincomp.address = maincomponentaddress;
+	this->maincomp.pawn.address = r6->mem->read<uintptr_t>(this->maincomp.address + offsets::Entity::pawn) + offsets::Entity::decryptionkey_pawn;
+	//Entity PAWN 0x20
+	this->maincomp.pawn.skeleton.address = this->maincomp.pawn.address + offsets::Entity::npawn::skeleton;
+	math::Vec4 headpos = this->maincomp.pawn.skeleton.get_bone(Skeleton::bone_ids::head);
+	this->maincomp.pawn.head = math::Vec3(headpos.x, headpos.y, headpos.z);
+	math::Vec4 feetpos = this->maincomp.pawn.skeleton.get_bone(Skeleton::bone_ids::knee_left);
+	this->maincomp.pawn.feet = math::Vec3(feetpos.x, feetpos.y, feetpos.z);
+
+	//Entity Information 0xD0
+	this->maincomp.info.address = r6->mem->read<uintptr_t>(this->maincomp.address + offsets::Entity::info);
+	this->maincomp.info.team = (r6->mem->read<BYTE>(this->maincomp.info.address + offsets::Entity::ninfo::team) + 0x24) & 0x3F;
+	this->maincomp.info.CTU = r6->mem->read<BYTE>(this->maincomp.info.address + offsets::Entity::ninfo::CTU);
+	this->maincomp.info.OP = r6->mem->read<BYTE>(this->maincomp.info.address + offsets::Entity::ninfo::OP);
+	uintptr_t namepointer = r6->mem->read<uintptr_t>(this->maincomp.info.address + 0x1C8);
+	r6->mem->cread(namepointer, this->maincomp.info.name, 0x15);
+
+	//Weapon 0x90
+	this->maincomp.weapon.address = r6->mem->read<uintptr_t>(this->maincomp.address + offsets::Entity::weapon);
+	this->maincomp.weapon.currweapon.address = r6->mem->read<uintptr_t>(this->maincomp.weapon.address + offsets::Entity::nweapon::currweapon);
+	this->maincomp.weapon.currweapon.info.address = r6->mem->read<uintptr_t>(this->maincomp.weapon.currweapon.address + offsets::Entity::nweapon::weaponinfo) + offsets::Entity::nweapon::decryptionkey_weaponinfo;
+	this->maincomp.weapon.currweapon.info.address += 0x18; //Because thats how the game calls it
+	this->maincomp.weapon.currweapon.ammo = r6->mem->read<int>(this->maincomp.weapon.currweapon.address + offsets::Entity::nweapon::ammo);
+	this->maincomp.weapon.currweapon.ammo_reserved = r6->mem->read<int>(this->maincomp.weapon.currweapon.address + offsets::Entity::nweapon::reserved);
+	this->maincomp.weapon.currweapon.fire_type = r6->mem->read<int>(this->maincomp.weapon.currweapon.address + offsets::Entity::nweapon::firetype);
+
+	//WeaponInfo Weapon->0x290
+	this->maincomp.weapon.currweapon.info.spread = r6->mem->read<float>(this->maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::spread);
+	this->maincomp.weapon.currweapon.info.recoilvert = r6->mem->read<float>(this->maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::recoilvert);
+	this->maincomp.weapon.currweapon.info.recoilhoriz = r6->mem->read<float>(this->maincomp.weapon.currweapon.info.address + offsets::Entity::nweapon::recoilhoriz);
+
+	//PlayerComponent
+	this->maincomp.playercomp.address = r6->mem->read<uintptr_t>(this->maincomp.address + offsets::Entity::playercomp) ^ offsets::Entity::ncomp::decryptionkey_player_component;
+	this->maincomp.playercomp.ComponentList.size = r6->mem->read<DWORD>(this->maincomp.playercomp.address + 0xE0) & 0x3FFFFFFF;
+	this->maincomp.playercomp.ComponentList.elements = new uintptr_t[this->maincomp.playercomp.ComponentList.size];
+	uintptr_t list_address = r6->mem->read<uintptr_t>(this->maincomp.playercomp.address + 0xD8);
+	for (int i = 0; i < this->maincomp.playercomp.ComponentList.size; i++)
+		this->maincomp.playercomp.ComponentList.elements[i] = r6->mem->read<uintptr_t>(list_address + i * sizeof(void*));
 }
 
 math::Vec4 Skeleton::get_bone(int idx) {
@@ -82,7 +131,7 @@ math::Vec4 Skeleton::get_bone(int idx) {
 	uintptr_t bone_info_ptr = r6->mem->read<uintptr_t>(bone_ptr);
 	uintptr_t bone_info = r6->mem->read<uintptr_t>(bone_info_ptr + 0x270);
 	uintptr_t bone_data = r6->mem->read<uintptr_t>(bone_info + 0x58);
-	const auto offset = 0x20 * bone_index + bone_data;
+	const auto offset = 0x20 * idx + bone_data;
 	return transform_bone(bone_info, (__m128*)offset);
 }
 
@@ -135,4 +184,33 @@ void WeaponInfo::set_recoil(float vert, float horiz) {
 	r6->mem->write<byte>(this->address + offsets::Entity::nweapon::recoil_overwrite, false);
 	r6->mem->write<float>(this->address + offsets::Entity::nweapon::recoilvert, vert);
 	r6->mem->write<float>(this->address + offsets::Entity::nweapon::recoilhoriz, horiz);
+}
+
+void MarkerComponent::find(R6Array<uintptr_t>* ComponentList) {
+	for (int i = 0; i < ComponentList->size; i++) {
+		uintptr_t curr_vtable_rel = r6->mem->read<uintptr_t>(ComponentList->elements[i]) - r6->base;
+		if (curr_vtable_rel == offsets::Entity::ncomp::vt_marker) {
+			this->address = ComponentList->elements[i];
+		}
+	}
+}
+void MarkerComponent::set_spotted_status(bool bSpotted) {
+	r6->mem->write<BYTE>(this->address + offsets::Entity::ncomp::bSpotted, bSpotted);
+}
+
+void WeaponInfo::set_recoil_addition(float pull, float kick) {
+	uintptr_t weapon_info = r6->mem->read<uintptr_t>(this->address + offsets::Entity::nweapon::weapon_info);
+	uintptr_t arry_to_single = r6->mem->read<uintptr_t>(weapon_info + offsets::Entity::nweapon::arry_to_single);
+	arry_to_single = r6->mem->read<uintptr_t>(arry_to_single);
+	uintptr_t curr_weapon_preset = r6->mem->read<uintptr_t>(arry_to_single + offsets::Entity::nweapon::current_weapon_preset);
+	curr_weapon_preset = r6->mem->read<uintptr_t>(curr_weapon_preset);
+	r6->mem->write<float>(curr_weapon_preset + offsets::Entity::nweapon::pull, pull);
+	r6->mem->write<float>(curr_weapon_preset + offsets::Entity::nweapon::kick, kick);
+
+	/*VALUE TABLE
+	uintptr_t test = r6->mem->read<uintptr_t>(curr_weapon_preset + 0x18);
+	for (DWORD off = 0x0; off < 0xCD4; off += 0x4) {
+		r6->mem->write<float>(test + off, 0.f);
+	}
+	*/
 }

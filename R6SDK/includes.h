@@ -10,9 +10,10 @@ struct R6Array {
 };
 #include "mem.h"
 #include "offsets.h"
+#include "RoundManager.h"
 #include "Entity.h"
 #include "GameManager.h"
-
+#include "GameProfileManager.h"
 
 
 class R6 {
@@ -27,6 +28,8 @@ public:
 
 	//R6 Managers
 	GameManager* gamemanager;
+	RoundManager* roundmanager;
+	GameProfileManager* gameprofilemanager;
 };
 
 
